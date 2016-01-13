@@ -5,7 +5,7 @@ VPATH = src:sdk
 BUILDDIR = build
 EXECUTABLES = executables
 
-all: lab1_IO
+all: checkdirs matrixgen serialtester
 
 
 $(BUILDDIR)/%.o: %.c
@@ -13,6 +13,9 @@ $(BUILDDIR)/%.o: %.c
 
 matrixgen: build/matrixgen.o
 	$(CC) -o $(EXECUTABLES)/matrixgen $<
+
+serialtester: build/lab1_IO.o build/serialtester.o 
+	$(CC) -o $(EXECUTABLES)/serialtester $^
 
 checkdirs: $(BUILDDIR) $(EXECUTABLES)
 
