@@ -11,8 +11,8 @@ all: checkdirs matrixgen serialtester multiply
 $(BUILDDIR)/%.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-multiply: $(BUILDDIR)/multiply.o
-	$(CC) -o $(BIN)/multiply $< $(CFLAGS)
+multiply: $(BUILDDIR)/multiply.o $(BUILDDIR)/utilities.o
+	$(CC) -o $(BIN)/multiply $^ 
 
 test: $(BUILDDIR)/test.o
 	$(CC) -o $(BIN)/test $< $(CFLAGS)
