@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-
+#include <math.h>
 #include "multiply.h"
 #include "utilities.h"
 #include "../sdk/lab1_IO.h"
-#include <math.h>
+#include "../sdk/timer.h"
 
 int **A; int **B; int **C; int n;
 int number_threads;
@@ -16,19 +16,24 @@ int main (int argc, char * argv[]){
 
 	Lab1_loadinput(&A, &B, &n);
 
-	C = createResultMatrix(n);
+	createResultMatrix(n);
+
+	double start_time;
+	double end_time;
+	GET_TIME(start_time);
 
 	int i;
 	for (i = 0; i < number_threads; i++){
-		pthread_create(threads[i], NULL, multiplyBlock, (void *) i);
+		pthread_create(&threads[i], NULL, multiplyBlock, (void *) i);
 	}
 
 	for (i = 0; i < number_threads; i++){
 		pthread_join(threads[i], NULL);
 	}
 
-	Lab1_saveoutput(C, &n, 1000);
+	GET_TIME(end_time);
 
+	Lab1_saveoutput(C, &n, end_time - start_time);
 
 	return 0;
 }
@@ -70,12 +75,10 @@ int multiplyVector(int i, int j){
 	return sum;
 }
 
-int ** createResultMatrix(int size){
-	int **C = malloc(size * sizeof(int *));
+void createResultMatrix(int size){
+	C = malloc(size * sizeof(int *));
 	int i;
 	for (i = 0; i < size; i++){
 		C[i] = malloc (size * sizeof(int *));
 	}
-
-	return C;
 }

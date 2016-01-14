@@ -34,3 +34,4 @@ $(BIN):
 clean:
 	rm -rf $(BUILDDIR) 
 	rm -rf $(BIN)
+	rm -f data_*

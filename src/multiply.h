@@ -22,6 +22,6 @@ void multiply_row_column(int, int, int, int);
 
 int multiplyVector(int, int);
 
-int ** createResultMatrix(int);
+void createResultMatrix(int);
 
 #endif
