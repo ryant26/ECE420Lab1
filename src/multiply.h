@@ -17,4 +17,11 @@ void print_usage();
 // Params: int number to check
 int check_square(int);
 
+
+void multiply_row_column(int, int, int, int);
+
+int multiplyVector(int, int);
+
+int ** createResultMatrix(int);
+
 #endif

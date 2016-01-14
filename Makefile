@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -Wall -lpthread
+CFLAGS := -Wall -lpthread -lm
 
 VPATH = src:sdk
 BUILDDIR = build
@@ -12,7 +12,7 @@ $(BUILDDIR)/%.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 multiply: $(BUILDDIR)/multiply.o $(BUILDDIR)/utilities.o $(BUILDDIR)/lab1_IO.o
-	$(CC) -o $(BIN)/multiply $^ 
+	$(CC) -o $(BIN)/multiply $^ $(CFLAGS)
 
 test: $(BUILDDIR)/test.o
 	$(CC) -o $(BIN)/test $< $(CFLAGS)
