@@ -3,31 +3,34 @@ CFLAGS := -Wall -lpthread
 
 VPATH = src:sdk
 BUILDDIR = build
-EXECUTABLES = executables
+BIN = bin
 
-all: checkdirs matrixgen serialtester
+all: checkdirs matrixgen serialtester multiply
 
 
 $(BUILDDIR)/%.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+multiply: $(BUILDDIR)/multiply.o
+	$(CC) -o $(BIN)/multiply $< $(CFLAGS)
+
 test: $(BUILDDIR)/test.o
-	$(CC) -o $(EXECUTABLES)/test $< $(CFLAGS)
+	$(CC) -o $(BIN)/test $< $(CFLAGS)
 
 matrixgen: build/matrixgen.o
-	$(CC) -o $(EXECUTABLES)/matrixgen $<
+	$(CC) -o $(BIN)/matrixgen $<
 
 serialtester: build/lab1_IO.o build/serialtester.o 
-	$(CC) -o $(EXECUTABLES)/serialtester $^
+	$(CC) -o $(BIN)/serialtester $^
 
-checkdirs: $(BUILDDIR) $(EXECUTABLES)
+checkdirs: $(BUILDDIR) $(BIN)
 
 $(BUILDDIR):
 	@mkdir -p $@
 
-$(EXECUTABLES):
+$(BIN):
 	@mkdir -p $@	
 
 clean:
 	rm -rf $(BUILDDIR) 
-	rm -rf $(EXECUTABLES)
+	rm -rf $(BIN)
