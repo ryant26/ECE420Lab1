@@ -4,7 +4,9 @@
 #include "multiply.h"
 
 int main (int argc, char * argv[]){
-	parse_number_threads(argc, argv);
+	int number_threads = parse_number_threads(argc, argv);
+
+	
 	return 0;
 }
 
@@ -20,10 +22,12 @@ int parse_number_threads(int argc, char** argv){
 	if (threads < 1 || !check_square(threads)){
 		printf("You entered an invalid number of threads\n");
 		printf("Please select a square integer greater than 1\n");
-		print_usage();		
+		print_usage();
+
+		exit(EXIT_FAILURE);		
 	}
 
-	return 0;
+	return threads;
 }
 
 void print_usage(){
