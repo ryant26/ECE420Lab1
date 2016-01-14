@@ -11,6 +11,9 @@ all: checkdirs matrixgen serialtester
 $(BUILDDIR)/%.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+test: $(BUILDDIR)/test.o
+	$(CC) -o $(EXECUTABLES)/test $< $(CFLAGS)
+
 matrixgen: build/matrixgen.o
 	$(CC) -o $(EXECUTABLES)/matrixgen $<
 
