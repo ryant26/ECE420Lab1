@@ -14,9 +14,6 @@ $(BUILDDIR)/%.o: %.c
 multiply: $(BUILDDIR)/multiply.o $(BUILDDIR)/utilities.o $(BUILDDIR)/lab1_IO.o
 	$(CC) -o $(BIN)/multiply $^ $(CFLAGS)
 
-test: $(BUILDDIR)/test.o
-	$(CC) -o $(BIN)/test $< $(CFLAGS)
-
 matrixgen: build/matrixgen.o
 	$(CC) -o $(BIN)/matrixgen $<
 
