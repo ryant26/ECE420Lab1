@@ -16,7 +16,7 @@ int main (int argc, char * argv[]){
 
 	Lab1_loadinput(&A, &B, &n);
 
-	createResultMatrix(n);
+	create_result_matrix(n);
 
 	double start_time;
 	double end_time;
@@ -45,13 +45,19 @@ void* multiplyBlock(void* threadID){
 	int x = k / sqrt(p);
 	int y = (int) k % (int) sqrt(p);
 
-	multiply_row_column((n/sqrt(p)) * x, (n/sqrt(p)) * y, 
-	((n/sqrt(p))*(x+1)) -1, ((n/sqrt(p))*(y+1)) -1);
+	int row_lower_bound = (n/sqrt(p)) * x;
+	int column_lower_bound = (n/sqrt(p)) * y;
+
+	int row_upper_bound = ((n/sqrt(p))*(x+1)) -1;
+	int column_upper_bound = ((n/sqrt(p))*(y+1)) -1;
+
+	solve_block(row_lower_bound, column_lower_bound, 
+	row_upper_bound, column_upper_bound);
 	
 	return 0;
 }
 
-void multiply_row_column(int row_lower_bound, int column_lower_bound, 
+void solve_block(int row_lower_bound, int column_lower_bound, 
 	int row_upper_bound, int column_upper_bound){
 
 	int i;
@@ -59,12 +65,12 @@ void multiply_row_column(int row_lower_bound, int column_lower_bound,
 
 	for (i = row_lower_bound; i <= row_upper_bound ; i++){
 		for (j = column_lower_bound; j <= column_upper_bound; j++){
-			C[i][j] = multiplyVector(i, j);
+			C[i][j] = multiply_vector(i, j);
 		}
 	}
 }
 
-int multiplyVector(int i, int j){
+int multiply_vector(int i, int j){
 	int x;
 
 	int sum = 0;
@@ -75,7 +81,7 @@ int multiplyVector(int i, int j){
 	return sum;
 }
 
-void createResultMatrix(int size){
+void create_result_matrix(int size){
 	C = malloc(size * sizeof(int *));
 	int i;
 	for (i = 0; i < size; i++){

@@ -17,11 +17,18 @@ void print_usage();
 // Params: int number to check
 int check_square(int);
 
+// Solves a block in the result matrix
+// Params: int row lower bound, int column lower bound,
+// int row upper bound, int column upper bound
+void solve_block(int, int, int, int);
 
-void multiply_row_column(int, int, int, int);
+// Multiply the vectors in matracies A and B that corrispond
+// to elemnt i and j in result matrix C (Cij)
+// Params: int i, int j
+int multiply_vector(int, int);
 
-int multiplyVector(int, int);
-
-void createResultMatrix(int);
+// Creates a size x size result matrix C 
+// Params: int size
+void create_result_matrix(int);
 
 #endif

@@ -5,14 +5,14 @@ VPATH = src:sdk
 BUILDDIR = build
 BIN = bin
 
-all: checkdirs matrixgen serialtester multiply
+all: checkdirs matrixgen serialtester main
 
 
 $(BUILDDIR)/%.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-multiply: $(BUILDDIR)/multiply.o $(BUILDDIR)/utilities.o $(BUILDDIR)/lab1_IO.o
-	$(CC) -o $(BIN)/multiply $^ $(CFLAGS)
+main: $(BUILDDIR)/multiply.o $(BUILDDIR)/utilities.o $(BUILDDIR)/lab1_IO.o
+	$(CC) -o $(BIN)/main $^ $(CFLAGS)
 
 matrixgen: build/matrixgen.o
 	$(CC) -o $(BIN)/matrixgen $<
